@@ -1,0 +1,51 @@
+name: dev build & deploy
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+env:
+  IMAGE_NAME: project-tracker
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file ./ProjectTracker.Api/Dockerfile --tag $IMAGE_NAME --label "githash=${GITHUB_SHA::8}"
+      - name: Log in to Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Tag docker image for PR
+        if: ${{ github.event_name == 'pull_request' }}
+        run: docker tag $IMAGE_NAME ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:pr${{ github.event.number }}-${GITHUB_SHA::8}
+      - name: Tag docker image for dev branch push
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          docker tag $IMAGE_NAME ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
+          docker tag $IMAGE_NAME ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:dev-${GITHUB_SHA::8}
+      - name: Push image to Container Registry for PR
+        if: ${{ github.event_name == 'pull_request' }}
+        run: docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:pr${{ github.event.number }}-${GITHUB_SHA::8}
+      - name: Push image to Container Registry for dev baranch push
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
+          docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:dev-${GITHUB_SHA::8}
+      - name: Get docker image id of latest
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          export DOCKER_IMAGE_ID=$(docker images ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest --format "{{.ID}}")
+          export DOCKER_IMAGE_ID=CR-$DOCKER_IMAGE_ID
+          echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
+      - name: Tag commit with docker image ID
+        if: ${{ github.event_name == 'push' }}
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: "${{ github.token }}"
+          tag: "${{ env.DOCKER_IMAGE_ID }}"
