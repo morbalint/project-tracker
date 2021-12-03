@@ -49,3 +49,10 @@ jobs:
         with:
           repo-token: "${{ github.token }}"
           tag: "${{ env.DOCKER_IMAGE_ID }}"
+          
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file ./ProjectTracker.Api.Unit.Tests/Dockerfile
