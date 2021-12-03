@@ -4,8 +4,17 @@
     <projectFile profileName="ProjectTracker.Api">ProjectTracker.Api/ProjectTracker.Api.csproj</projectFile>
     <projectFile profileName="IIS Express">ProjectTracker.Api/ProjectTracker.Api.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9a0ef430-2347-4df3-b207-c2823ab5d0d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ProjectTracker.Api/Controllers/ProjectsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectTracker.Api/DTOs/ProjectCreationDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectTracker.Api/DTOs/ProjectDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectTracker.Api/Services/IProjectsService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectTracker.Api/Services/ProjectsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectTracker/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectTracker/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectTracker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectTracker/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectTracker.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTracker.Api/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectTracker.Api/ProjectTracker.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTracker.Api/ProjectTracker.Api.csproj" afterDir="false" />
@@ -19,6 +28,20 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d4f4ac7db6d2c5d183ab2d92602280ed4349fd6e6a1b6313546b3d01fdab5/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="21mvv00Lsve71n8Sj23JiKiBjEh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -29,7 +52,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ProjectTracker.Api">
@@ -73,6 +100,7 @@
       <option name="presentableId" value="Default" />
       <updated>1638559303578</updated>
       <workItem from="1638559313127" duration="834000" />
+      <workItem from="1638563304906" duration="4873000" />
     </task>
     <servers />
   </component>
