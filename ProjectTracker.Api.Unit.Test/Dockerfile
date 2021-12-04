@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS test
 WORKDIR /src
+COPY ["ProjectTracker.Db/ProjectTracker.Db.csproj", "ProjectTracker.Db/"]
+COPY ["ProjectTracker.Db/packages.lock.json", "ProjectTracker.Db/"]
 COPY ["ProjectTracker.Api/ProjectTracker.Api.csproj", "ProjectTracker.Api/"]
 COPY ["ProjectTracker.Api/packages.lock.json", "ProjectTracker.Api/"]
 COPY ["ProjectTracker.Api.Unit.Test/ProjectTracker.Api.Unit.Test.csproj", "ProjectTracker.Api.Unit.Test/"]

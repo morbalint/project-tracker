@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Api", "Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Api.Unit.Test", "ProjectTracker.Api.Unit.Test\ProjectTracker.Api.Unit.Test.csproj", "{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Db", "ProjectTracker.Db\ProjectTracker.Db.csproj", "{9310792B-B76F-4649-9008-5493F48E5E3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9310792B-B76F-4649-9008-5493F48E5E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9310792B-B76F-4649-9008-5493F48E5E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9310792B-B76F-4649-9008-5493F48E5E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9310792B-B76F-4649-9008-5493F48E5E3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
