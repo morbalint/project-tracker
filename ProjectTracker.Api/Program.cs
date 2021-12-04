@@ -1,9 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using ProjectTracker.Api.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
+using ProjectTracker.Db;
 
 JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 {
@@ -15,7 +17,14 @@ JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Configuration
+builder.Configuration
+    .AddJsonFile("appsettings.json", reloadOnChange: true, optional: true)
+    .AddJsonFile($"appsettings.{builder.Environment}.json", reloadOnChange: true, optional: true)
+    .AddEnvironmentVariables()
+    .AddCommandLine(args);
+
+// Add AspNetCore controllers with Json
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {
@@ -30,11 +39,18 @@ builder.Services.AddControllers()
             .Tzdb);
     });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => options.ConfigureForNodaTime());
+// Database
+builder.Services.AddDbContext<PtDbContext>(optionsBuilder =>
+    optionsBuilder.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        npgSqlOptions => npgSqlOptions.UseNodaTime()));
 
+// 3rd party
+builder.Services.AddEndpointsApiExplorer(); // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddSwaggerGen(options => options.ConfigureForNodaTime());
 builder.Services.AddSingleton<IClock>(SystemClock.Instance);
+
+// Domain Services
 builder.Services.AddSingleton<IProjectsService, ProjectsService>();
 
 var app = builder.Build();
