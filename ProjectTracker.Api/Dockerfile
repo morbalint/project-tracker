@@ -6,7 +6,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ProjectTracker.Db/ProjectTracker.Db.csproj", "ProjectTracker.Db/"]
-COPY ["ProjectTracker.Db/packages-lock.json", "ProjectTracker.Db/"]
+COPY ["ProjectTracker.Db/packages.lock.json", "ProjectTracker.Db/"]
 COPY ["ProjectTracker.Api/ProjectTracker.Api.csproj", "ProjectTracker.Api/"]
 COPY ["ProjectTracker.Api/packages.lock.json", "ProjectTracker.Api/"]
 RUN dotnet restore "ProjectTracker.Api/ProjectTracker.Api.csproj" --locked-mode
