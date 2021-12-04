@@ -1479,7 +1479,7 @@
           "xunit.extensibility.core": "[2.4.1]"
         }
       },
-      "projecttracker.api": {
+      "pt.api": {
         "type": "Project",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.0",
@@ -1488,13 +1488,13 @@
           "NodaTime": "3.0.9",
           "NodaTime.Serialization.JsonNet": "3.0.0",
           "NodaTime.Serialization.SystemTextJson": "1.0.0",
-          "ProjectTracker.Db": "1.0.0",
+          "Pt.Db": "1.0.0",
           "Serilog.NodaTime": "3.0.0",
           "Swashbuckle.AspNetCore": "6.2.3",
           "Swashbuckle.NodaTime.AspNetCore": "4.0.1"
         }
       },
-      "projecttracker.db": {
+      "pt.db": {
         "type": "Project",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Analyzers": "6.0.0",

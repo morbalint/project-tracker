@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -13,10 +12,9 @@ using ProjectTracker.Db;
 namespace ProjectTracker.Db.Migrations
 {
     [DbContext(typeof(PtDbContext))]
-    [Migration("20211204095345_initial")]
-    partial class initial
+    partial class PtDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +23,7 @@ namespace ProjectTracker.Db.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ProjectTracker.Db.Entities.Project", b =>
+            modelBuilder.Entity("Pt.Db.Entities.Project", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +44,7 @@ namespace ProjectTracker.Db.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("ProjectTracker.Db.Entities.WorkedOnDay", b =>
+            modelBuilder.Entity("Pt.Db.Entities.WorkedOnDay", b =>
                 {
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
@@ -65,9 +63,9 @@ namespace ProjectTracker.Db.Migrations
                     b.ToTable("WorkedOnDays");
                 });
 
-            modelBuilder.Entity("ProjectTracker.Db.Entities.WorkedOnDay", b =>
+            modelBuilder.Entity("Pt.Db.Entities.WorkedOnDay", b =>
                 {
-                    b.HasOne("ProjectTracker.Db.Entities.Project", "ProjectLink")
+                    b.HasOne("Pt.Db.Entities.Project", "ProjectLink")
                         .WithMany("WorkedOnDays")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -76,7 +74,7 @@ namespace ProjectTracker.Db.Migrations
                     b.Navigation("ProjectLink");
                 });
 
-            modelBuilder.Entity("ProjectTracker.Db.Entities.Project", b =>
+            modelBuilder.Entity("Pt.Db.Entities.Project", b =>
                 {
                     b.Navigation("WorkedOnDays");
                 });

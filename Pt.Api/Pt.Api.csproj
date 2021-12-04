@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectTracker.Db\ProjectTracker.Db.csproj" />
+    <ProjectReference Include="..\Pt.Db\Pt.Db.csproj" />
   </ItemGroup>
 
 </Project>
