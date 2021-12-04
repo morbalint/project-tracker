@@ -1484,6 +1484,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore.Analyzers": "6.0.0",
           "NodaTime": "3.0.9",
           "NodaTime.Serialization.JsonNet": "3.0.0",
           "NodaTime.Serialization.SystemTextJson": "1.0.0",
@@ -1496,6 +1497,7 @@
       "projecttracker.db": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": "6.0.0",
           "NodaTime": "3.0.9",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "6.0.1"

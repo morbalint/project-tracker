@@ -12,7 +12,7 @@ COPY ["ProjectTracker.Api/packages.lock.json", "ProjectTracker.Api/"]
 RUN dotnet restore "ProjectTracker.Api/ProjectTracker.Api.csproj" --locked-mode
 COPY . .
 WORKDIR "/src/ProjectTracker.Api"
-RUN dotnet build "ProjectTracker.Api.csproj" --no-restore -c Release -o /app/build
+RUN dotnet build "ProjectTracker.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "ProjectTracker.Api.csproj" --no-build -c Release -o /app/publish
