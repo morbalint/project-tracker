@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Api", "ProjectTracker.Api\ProjectTracker.Api.csproj", "{9DE1453F-8C82-4DA4-95D0-140C7396068B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pt.Api", "Pt.Api\Pt.Api.csproj", "{9DE1453F-8C82-4DA4-95D0-140C7396068B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Api.Unit.Test", "ProjectTracker.Api.Unit.Test\ProjectTracker.Api.Unit.Test.csproj", "{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pt.Api.Unit.Test", "Pt.Api.Unit.Test\Pt.Api.Unit.Test.csproj", "{1BFBB42F-DE1F-4BC4-8155-265430CE11BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTracker.Db", "ProjectTracker.Db\ProjectTracker.Db.csproj", "{9310792B-B76F-4649-9008-5493F48E5E3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pt.Db", "Pt.Db\Pt.Db.csproj", "{9310792B-B76F-4649-9008-5493F48E5E3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file ./ProjectTracker.Api/Dockerfile --tag $IMAGE_NAME --label "githash=${GITHUB_SHA::8}"
+        run: docker build . --file ./Pt.Api/Dockerfile --tag $IMAGE_NAME --label "githash=${GITHUB_SHA::8}"
       - name: Log in to Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Tag docker image for PR
@@ -55,4 +55,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file ./ProjectTracker.Api.Unit.Test/Dockerfile
+        run: docker build . --file ./Pt.Api.Unit.Test/Dockerfile
