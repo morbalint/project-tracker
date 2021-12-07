@@ -2,21 +2,10 @@ using NodaTime;
 
 namespace ProjectTracker.Api.DTOs;
 
-public class ProjectDto
-{
-    public ProjectDto(Guid id, string name, Instant startTime, Instant[] datesWorkedOn)
-    {
-        Id = id;
-        Name = name;
-        StartTime = startTime;
-        DatesWorkedOn = datesWorkedOn;
-    }
+public record ProjectCreationDto(string Name, Instant? StartTime, string? Notes);
 
-    public Guid Id { get; set; }
+public record ProjectSummaryDto(Guid Id, string Name, uint TotalDaysWorkedOn, uint TotalHoursWorkedOn, Instant StartTime);
 
-    public string Name { get; set; }
-    
-    public Instant StartTime { get; set; }
+public record ProjectDto(Guid Id, string Name, Instant StartTime, String Notes, WorkOnDayDto[] DaysWorkedOn);
 
-    public Instant[] DatesWorkedOn { get; set; } 
-}
+public record WorkOnDayDto(Instant Day, string Notes, uint? Hours);

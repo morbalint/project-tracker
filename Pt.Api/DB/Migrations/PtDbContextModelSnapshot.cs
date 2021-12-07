@@ -2,21 +2,19 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ProjectTracker.Db;
+using ProjectTracker.Api.DB;
 
 #nullable disable
 
-namespace ProjectTracker.Db.Migrations
+namespace ProjectTracker.Api.DB.Migrations
 {
     [DbContext(typeof(PtDbContext))]
-    [Migration("20211204095345_initial")]
-    partial class initial
+    partial class PtDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,17 +23,17 @@ namespace ProjectTracker.Db.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Pt.Db.Entities.Project", b =>
+            modelBuilder.Entity("ProjectTracker.Api.DB.Entities.Project", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Instant>("CreationDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
                         .HasColumnType("text");
 
                     b.Property<Instant>("StartDate")
@@ -46,7 +44,7 @@ namespace ProjectTracker.Db.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Pt.Db.Entities.WorkedOnDay", b =>
+            modelBuilder.Entity("ProjectTracker.Api.DB.Entities.WorkedOnDay", b =>
                 {
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
@@ -54,7 +52,7 @@ namespace ProjectTracker.Db.Migrations
                     b.Property<Instant>("Day")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("Hours")
+                    b.Property<long?>("Hours")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Notes")
@@ -65,9 +63,9 @@ namespace ProjectTracker.Db.Migrations
                     b.ToTable("WorkedOnDays");
                 });
 
-            modelBuilder.Entity("Pt.Db.Entities.WorkedOnDay", b =>
+            modelBuilder.Entity("ProjectTracker.Api.DB.Entities.WorkedOnDay", b =>
                 {
-                    b.HasOne("Pt.Db.Entities.Project", "ProjectLink")
+                    b.HasOne("ProjectTracker.Api.DB.Entities.Project", "ProjectLink")
                         .WithMany("WorkedOnDays")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -76,7 +74,7 @@ namespace ProjectTracker.Db.Migrations
                     b.Navigation("ProjectLink");
                 });
 
-            modelBuilder.Entity("Pt.Db.Entities.Project", b =>
+            modelBuilder.Entity("ProjectTracker.Api.DB.Entities.Project", b =>
                 {
                     b.Navigation("WorkedOnDays");
                 });

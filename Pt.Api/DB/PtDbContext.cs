@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectTracker.Db.Entities;
+using Project = ProjectTracker.Api.DB.Entities.Project;
+using WorkedOnDay = ProjectTracker.Api.DB.Entities.WorkedOnDay;
 
-namespace ProjectTracker.Db;
+namespace ProjectTracker.Api.DB;
 
 public class PtDbContext : DbContext
 {

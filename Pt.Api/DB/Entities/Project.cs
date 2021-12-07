@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using NodaTime;
 
-namespace ProjectTracker.Db.Entities;
+namespace ProjectTracker.Api.DB.Entities;
 
 public class Project
 {
@@ -13,9 +13,9 @@ public class Project
     public string Name { get; set; } = null!; // Required. 
     
     public Instant StartDate { get; set; }
+    
+    public string? Notes { get; set; }
 
-    public Instant CreationDate { get; set; }
-
-    [InverseProperty(nameof(WorkedOnDay.ProjectLink))]
-    public ISet<WorkedOnDay> WorkedOnDays { get; set; } = new HashSet<WorkedOnDay>();
+    [InverseProperty(nameof(Api.DB.Entities.WorkedOnDay.ProjectLink))]
+    public ISet<Api.DB.Entities.WorkedOnDay> WorkedOnDays { get; set; } = new HashSet<Api.DB.Entities.WorkedOnDay>();
 }

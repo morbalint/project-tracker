@@ -4,7 +4,7 @@ using NodaTime;
 
 #nullable disable
 
-namespace ProjectTracker.Db.Migrations
+namespace ProjectTracker.Api.DB.Migrations
 {
     public partial class initial : Migration
     {
@@ -17,7 +17,7 @@ namespace ProjectTracker.Db.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     StartDate = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
-                    CreationDate = table.Column<Instant>(type: "timestamp with time zone", nullable: false)
+                    Notes = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace ProjectTracker.Db.Migrations
                 {
                     ProjectId = table.Column<Guid>(type: "uuid", nullable: false),
                     Day = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
-                    Hours = table.Column<long>(type: "bigint", nullable: false),
+                    Hours = table.Column<long>(type: "bigint", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
