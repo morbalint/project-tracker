@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjectTracker.Api.DB.Repositories;
 using ProjectTracker.Api.DTOs;
-using ProjectTracker.Api.Services;
 
 namespace ProjectTracker.Api.Controllers
 {
@@ -8,22 +8,22 @@ namespace ProjectTracker.Api.Controllers
     [Route("projects")]
     public class ProjectsController : ControllerBase
     {
-        private readonly IProjectsService _service;
+        private readonly IProjectRepository _service;
 
-        public ProjectsController(IProjectsService service)
+        public ProjectsController(IProjectRepository service)
         {
             _service = service;
         }
         
         [HttpGet]
-        public Task<ProjectDto[]> Get(string? name)
+        public Task<ProjectSummaryDto[]> Get(string? name)
         {
             return name is null ? _service.GetAll() : _service.GetByName(name);
         }
 
         [ProducesResponseType(typeof(ProjectDto), 200)]
         [ProducesResponseType(404)]
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<ActionResult<ProjectDto>> GetById(Guid id)
         {
             var project = await _service.GetById(id);

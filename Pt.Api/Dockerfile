@@ -5,8 +5,6 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Pt.Db/Pt.Db.csproj", "Pt.Db/"]
-COPY ["Pt.Db/packages.lock.json", "Pt.Db/"]
 COPY ["Pt.Api/Pt.Api.csproj", "Pt.Api/"]
 COPY ["Pt.Api/packages.lock.json", "Pt.Api/"]
 RUN dotnet restore "Pt.Api/Pt.Api.csproj" --locked-mode

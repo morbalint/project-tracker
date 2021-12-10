@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using NodaTime;
+using ProjectTracker.Api.DB.Entities;
 
-namespace ProjectTracker.Db.Entities;
+namespace ProjectTracker.Api.DB.Entities;
 
 public class WorkedOnDay
 {
@@ -9,7 +10,7 @@ public class WorkedOnDay
     
     public Instant Day { get; set; }
     
-    public uint Hours { get; set; }
+    public uint? Hours { get; set; }
     
     public string? Notes { get; set; }
     

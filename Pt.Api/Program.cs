@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using ProjectTracker.Api.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using ProjectTracker.Db;
+using ProjectTracker.Api.DB;
+using ProjectTracker.Api.DB.Repositories;
 
 JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 {
@@ -51,9 +51,16 @@ builder.Services.AddSwaggerGen(options => options.ConfigureForNodaTime());
 builder.Services.AddSingleton<IClock>(SystemClock.Instance);
 
 // Domain Services
-builder.Services.AddSingleton<IProjectsService, ProjectsService>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 var app = builder.Build();
+
+// Migrate DB
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PtDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
