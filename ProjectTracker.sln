@@ -1,6 +1,6 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pt.Api", "Pt.Api\Pt.Api.csproj", "{9DE1453F-8C82-4DA4-95D0-140C7396068B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pt.Api", "api\Pt.Api\Pt.Api.csproj", "{9DE1453F-8C82-4DA4-95D0-140C7396068B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
