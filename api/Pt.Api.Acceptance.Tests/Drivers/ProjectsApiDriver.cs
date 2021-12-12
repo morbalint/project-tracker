@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pt.Api.Acceptance.Tests.Config;
 using Pt.Api.Acceptance.Tests.DTOs;
@@ -8,6 +9,8 @@ namespace Pt.Api.Acceptance.Tests.Drivers
 {
     public class ProjectsApiDriver : IProjectsApiDriver
     {
+        private const string ProjectsEndpoint = "projects";
+        
         private readonly IRestClient _client;
 
         public ProjectsApiDriver(IRestClient client)
@@ -17,7 +20,7 @@ namespace Pt.Api.Acceptance.Tests.Drivers
         
         public Task<IRestResponse<Guid>> CreateProject(CreateProjectDto dto)
         {
-            var request = new RestRequest("projects", Method.POST)
+            var request = new RestRequest(ProjectsEndpoint, Method.POST)
             {
                 RequestFormat = DataFormat.Json,
             };
@@ -25,14 +28,15 @@ namespace Pt.Api.Acceptance.Tests.Drivers
             return _client.ExecuteAsync<Guid>(request);
         }
 
-        public Task<IRestResponse<ProjectSummaryDto[]>> ListAllProjects()
+        public Task<IRestResponse<IEnumerable<ProjectSummaryDto>>> ListAllProjects()
         {
-            throw new NotImplementedException();
+            var request = new RestRequest(ProjectsEndpoint, Method.GET);
+            return _client.ExecuteAsync<IEnumerable<ProjectSummaryDto>>(request);
         }
 
         public Task<IRestResponse<ProjectDto>> GetProjectById(Guid id)
         {
-            var request = new RestRequest("projects/{id}", Method.GET);
+            var request = new RestRequest(ProjectsEndpoint + "/{id}", Method.GET);
             request.AddParameter("id", id, ParameterType.UrlSegment);
             return _client.ExecuteAsync<ProjectDto>(request);
         }
