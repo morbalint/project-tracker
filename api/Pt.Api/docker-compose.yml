@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=pt
+      - POSTGRES_PASSWORD=${PGPW:?missing postgres password}
+  api:
+    build:
+      context: ../
+      dockerfile: Pt.Api/Dockerfile
+    environment:
+      - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=${PGPW:?missing postgres password};Password=pt;'
+    ports:
+      - '443:443'

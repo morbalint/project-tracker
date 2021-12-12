@@ -18,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build api/ --file api/Pt.Api/Dockerfile --tag $IMAGE_NAME --label "githash=${GITHUB_SHA::8}"
+        working-directory: api
+        run: docker build . --file Pt.Api/Dockerfile --tag $IMAGE_NAME --label "githash=${GITHUB_SHA::8}"
       - name: Log in to Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Tag docker image for PR
@@ -49,3 +50,11 @@ jobs:
         with:
           repo-token: "${{ github.token }}"
           tag: "${{ env.DOCKER_IMAGE_ID }}"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run dockerized API behaviour tests
+        working-directory: api/Pt.Api.Acceptance.Tests/
+        run: docker-compose run tests 
