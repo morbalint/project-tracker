@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddJsonFile("appsettings.json", reloadOnChange: true, optional: true)
     .AddJsonFile($"appsettings.{builder.Environment}.json", reloadOnChange: true, optional: true)
-    .AddEnvironmentVariables()
+    .AddEnvironmentVariables("PT_API_")
     .AddCommandLine(args);
 
 // Add AspNetCore controllers with Json
@@ -68,8 +68,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
+else
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
