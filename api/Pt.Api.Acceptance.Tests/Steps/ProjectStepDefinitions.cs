@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -74,6 +75,23 @@ namespace Pt.Api.Acceptance.Tests.Steps
                 options => options
                     .Excluding(p => p.Id)
                     .Excluding(p => p.StartTime));
+        }
+
+        [When(@"the projects GET endpoint is called")]
+        public async Task WhenTheProjectsGetEndpointIsCalled()
+        {
+            var response = await _driver.ListAllProjects();
+            _context.ListOfProjects = response.IsSuccessful ? response.Data.ToArray() : null;
+            _response = response;
+        }
+
+
+        [Then(@"the response should contain a project like this")]
+        public void ThenTheResponseShouldContainAProjectLikeThis(Table table)
+        {
+            var projectToSearchFor = table.CreateInstance<ProjectSummaryDto>();
+            _context.ListOfProjects.Should().Contain(dto =>
+                dto.Name.Equals(projectToSearchFor.Name, StringComparison.InvariantCulture));
         }
     }
 }
