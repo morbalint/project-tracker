@@ -10,5 +10,7 @@ namespace Pt.Api.Acceptance.Tests.Drivers
         public Task<IRestResponse<Guid>> CreateProject(CreateProjectDto dto);
 
         public Task<IRestResponse<ProjectSummaryDto[]>> ListAllProjects();
+        
+        public Task<IRestResponse<ProjectDto>> GetProjectById(Guid id);
     }
 }

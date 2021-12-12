@@ -29,5 +29,12 @@ namespace Pt.Api.Acceptance.Tests.Drivers
         {
             throw new NotImplementedException();
         }
+
+        public Task<IRestResponse<ProjectDto>> GetProjectById(Guid id)
+        {
+            var request = new RestRequest("projects/{id}", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            return _client.ExecuteAsync<ProjectDto>(request);
+        }
     }
 }

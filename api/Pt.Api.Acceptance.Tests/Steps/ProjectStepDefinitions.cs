@@ -16,7 +16,7 @@ namespace Pt.Api.Acceptance.Tests.Steps
     {
         private readonly ProjectsContext _context;
         private readonly IProjectsApiDriver _driver;
-        private IRestResponse<Guid>? _response;
+        private IRestResponse? _response;
 
         public ProjectStepDefinitions(
             ProjectsContext context,
@@ -37,7 +37,9 @@ namespace Pt.Api.Acceptance.Tests.Steps
         public async Task WhenTheProjectsPostEndpointIsCalled()
         {
             _context.CreateDto.Should().NotBeNull();
-            _response = await _driver.CreateProject(_context.CreateDto!);
+            var response = await _driver.CreateProject(_context.CreateDto!);
+            _context.Id = response.IsSuccessful ? response.Data : null;
+            _response = response;
         }
 
         [Then(@"the response should be OK")]
@@ -45,14 +47,33 @@ namespace Pt.Api.Acceptance.Tests.Steps
         {
             _response.Should()
                 .NotBeNull().And.Subject
-                .As<IRestResponse<Guid>>()
+                .As<IRestResponse>()
                 .StatusCode.Should().Be(HttpStatusCode.OK, _response!.ErrorMessage);
         }
         
         [Then(@"the response should be a non null id")]
         public void ThenTheResponseShouldBeANonNullId()
         {
-            _response!.Data.Should().NotBe(Guid.Empty);
+            _context.Id.Should().NotBeNull().And.NotBe(Guid.Empty);
+        }
+
+        [When(@"the projects GET endpoint is called with the context Id")]
+        public async Task WhenTheProjectsGetEndpointIsCalledWithTheContextId()
+        {
+            _context.Id.Should().NotBeNull();
+            var response = await _driver.GetProjectById(_context.Id!.Value);
+            _context.DetailDto = response.IsSuccessful ? response.Data : null;
+        }
+
+        [Then(@"the response project should be the same")]
+        public void ThenTheResponseProjectShouldBeTheSame(Table table)
+        {
+            var project = table.CreateInstance<ProjectDto>();
+            project.Should().BeEquivalentTo(
+                _context.DetailDto!,
+                options => options
+                    .Excluding(p => p.Id)
+                    .Excluding(p => p.StartTime));
         }
     }
 }
