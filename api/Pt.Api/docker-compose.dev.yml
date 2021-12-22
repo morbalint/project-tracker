@@ -12,6 +12,7 @@ services:
       dockerfile: Pt.Api/Dockerfile
     environment:
       - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=${PGPW:-pt};Password=pt;'
+      - 'DOTNET_ENVIRONMENT=Development'
     ports:
       - '8443:443'
       - '8080:80'
