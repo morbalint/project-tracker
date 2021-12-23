@@ -1,19 +1,25 @@
 version: '3'
 
-services: 
+services:
   db:
     image: postgres
     environment:
       - POSTGRES_USER=pt
       - POSTGRES_PASSWORD=${PGPW:-pt}
-  api:
+  pt-api:
     build:
-      context: ../
+      context: api
       dockerfile: Pt.Api/Dockerfile
     environment:
       - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=pt;Password=${PGPW:-pt};'
-      - 'DOTNET_ENVIRONMENT=Development'
+  pt-ui:
+    build:
+      context: ui/project-tracker
+      args:
+        NEXT_PUBLIC_API_BASE_URI: api
+  proxy:
+    image: nginx
+    volumes:
+      - ./reverse-proxy/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
-      - '8443:443'
       - '8080:80'
-    

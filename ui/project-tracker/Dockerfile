@@ -5,6 +5,7 @@ EXPOSE 443
 
 FROM node:16 AS build
 WORKDIR /src
+ARG NEXT_PUBLIC_API_BASE_URI
 COPY ["package.json", "."]
 COPY ["yarn.lock", "."]
 RUN yarn install

@@ -11,6 +11,6 @@ services:
       context: ../
       dockerfile: Pt.Api/Dockerfile
     environment:
-      - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=${PGPW:?missing postgres password};Password=pt;'
+      - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=pt;Password=${PGPW:?missing postgres password};'
     ports:
       - '8000:80'
