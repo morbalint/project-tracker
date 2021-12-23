@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=pt
+      - POSTGRES_PASSWORD=${PGPW:?missing postgres password}
+  api:
+    build:
+      context: api
+      dockerfile: Pt.Api/Dockerfile
+    environment:
+      - 'PT_API_ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=pt;User Id=${PGPW:?missing postgres password};Password=pt;'
+  ui:
+    build:
+      context: ui/project-tracker
+      args:
+        NEXT_PUBLIC_API_BASE_URI: api
+  proxy:
+    image: nginx
+    volumes:
+      - /reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '80:80'

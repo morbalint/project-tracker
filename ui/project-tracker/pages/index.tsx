@@ -9,10 +9,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.text())
 const Home: NextPage = () => {
     
     // TODO: use some dev env switch
-    const { data, error } = useSWR('http://localhost:8080/projects', fetcher)
-
-    if (error) return <div>failed to load</div>
-    if (!data) return <div>loading...</div>
+    const { data, error } = useSWR(process.env.NEXT_PUBLIC_API_BASE_URI + '/projects', fetcher)
     
   return (
     <div className={styles.container}>
@@ -27,7 +24,7 @@ const Home: NextPage = () => {
         </h1>
 
           {!data && <p>loading...</p>}
-          {error && <p> error </p>}
+          {error && <p> {JSON.stringify(error)} </p>}
 
           {data && <p>{data}</p>}
         
